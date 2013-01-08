@@ -25,23 +25,23 @@ function replace_post_permalink($post_link, $id = 0, $leavename = false) {
         )
     );
 
-add_action('admin_menu', 'kanji_add_box');
+add_action('admin_menu', 'replace_post_permalink_add_box');
 
     //Add meta boxes to post types
-    function kanji_add_box() {
+    function replace_post_permalink_add_box() {
         global $meta_box;
        
         foreach($meta_box as $post_type => $value) {
-            add_meta_box($value['id'], $value['title'], 'kanji_format_box', $post_type, $value['context'], $value['priority']);
+            add_meta_box($value['id'], $value['title'], 'replace_post_permalink_format_box', $post_type, $value['context'], $value['priority']);
         }
     }
 
 
-function kanji_format_box() {
+function replace_post_permalink_format_box() {
   global $meta_box, $post;
  
   // Use nonce for verification
-  echo '<input type="hidden" name="kanji_meta_box_nonce" value="', wp_create_nonce(basename(__FILE__)), '" />';
+  echo '<input type="hidden" name="replace_post_permalink_meta_box_nonce" value="', wp_create_nonce(basename(__FILE__)), '" />';
  
   echo '<table class="form-table">';
  
@@ -84,13 +84,13 @@ function kanji_format_box() {
 
 
 
-function kanji_save_data($post_id) {
+function replace_post_permalink_save_data($post_id) {
     global $meta_box;
 
   $post = get_post($post_id);
    
     //Verify nonce
-    if (!wp_verify_nonce($_POST['kanji_meta_box_nonce'], basename(__FILE__))) {
+    if (!wp_verify_nonce($_POST['replace_post_permalink_meta_box_nonce'], basename(__FILE__))) {
         return $post_id;
     }
  
@@ -120,4 +120,4 @@ function kanji_save_data($post_id) {
     }
 unset ($field);
 }
-add_action('save_post', 'kanji_save_data');
+add_action('save_post', 'replace_post_permalink_save_data');
