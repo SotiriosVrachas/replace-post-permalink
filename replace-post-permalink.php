@@ -1,4 +1,15 @@
 <?php
+/*
+Plugin Name: Replace Post Permalink
+Plugin URI: http://www.vrachas.net/replace-post-permalink/
+Description: a wordpress plugin which adds a box in the edit screen whare you type whare you want the link to that article to point and it change the permalink.
+Version: 0.1
+Author: Sotirios Vrachas
+Author URI: http://www.vrachas.net
+License: GPL2
+*/
+?>
+<?php
 add_filter('post_type_link', 'replace_post_permalink', 1);
 function replace_post_permalink($post_link, $id = 0, $leavename = false) {
   $post = get_post($id);
