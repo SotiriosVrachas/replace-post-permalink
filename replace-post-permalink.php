@@ -132,3 +132,4 @@ function replace_post_permalink_save_data($post_id) {
 unset ($field);
 }
 add_action('save_post', 'replace_post_permalink_save_data');
+?>
